@@ -1,0 +1,13 @@
+- hosts: all
+  become: true
+  vars_files:
+    - vars.yaml
+  gather_facts: false
+  tasks:
+#Block an IP address from going to the victim server
+  - name: Block specific IP address
+    ansible.builtin.iptables:
+      chain: INPUT
+      source: "{{ip_address}}"
+      jump: DROP
+    become: yes
