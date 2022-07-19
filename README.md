@@ -4,3 +4,7 @@ Cloud computing is currently considered the most cost-effective platform for off
 The file "two_phase_EDOS.pdf" is the presentation of the project.
 
 Implmentation steps are presented in the "process-steps" ppt file
+
+If you use this source code, please cite this publication:
+"Nhu, C.-N.; Park, M. Two-Phase Deep Learning-Based EDoS Detection System. Appl. Sci. 2021, 11, 10249. https://doi.org/10.3390/app112110249"
+
