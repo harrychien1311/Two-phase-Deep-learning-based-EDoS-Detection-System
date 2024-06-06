@@ -11,10 +11,10 @@ do
 	if [ $a = "1" ]
 	then
 		echo "There is an attack in that period"
-		#split the abnormal pcap file of period into each pcap file of flow
-		mono SplitCap.exe -r "${file}" -o example -s flow
+		# Split the abnormal pcap file of period into each pcap file of flow
+		mono SplitCap.exe -r "${file}" -o flow_detection -s flow
 		sleep 2
-		cd example
+		cd flow_detection
 		for file1 in *.pcap
 		do
 			echo "Detecting abnormal flow"

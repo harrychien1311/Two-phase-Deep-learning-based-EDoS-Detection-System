@@ -7,8 +7,7 @@ from pyspark.context import SparkContext
 import pandas as pd
 import keras
 import yaml
-#import ansible.inventory
-#from ansible_playbook_runner import Runner
+import joblib
 
 def processPcap(fileName):
     #print('Opening {}...'.format(fileName))
@@ -123,7 +122,7 @@ def processPcap(fileName):
 
 def periodDetector(data):
     #load ANN model
-    model = keras.models.load_model('model_ANN.h5')
+    model = keras.models.load_model('models/period_model.h5')
     #predict a period:
     period_type = (model.predict(data)>0.5).astype(int)
 
@@ -139,10 +138,12 @@ if __name__ == '__main__':
     if not os.path.isfile(fileName):
         print('"{}" does not exist'.format(fileName), file=sys.stderr)
         sys.exit(-1)
-
+    #load scaler
+    scaler=joblib.load('models/period_scaler.gz')
     #Extract feature of a period from a pcap file
     periodFeatures = processPcap(fileName)
-    #print(periodFeatures)
+    #Normalizing the collected data
+    periodFeatures = scaler.transform(periodFeatures)
     # Detect abnormal period
     isAbnormalPeriod = periodDetector(periodFeatures)
     #print("prediction results:" ,isAbnormalPeriod)

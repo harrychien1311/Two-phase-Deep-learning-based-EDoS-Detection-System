@@ -1,0 +1,8 @@
+numpy
+keras
+tensorflow
+pandas
+sklearn
+pyspark
+yaml
+ansible
